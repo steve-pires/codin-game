@@ -21,25 +21,47 @@ class Player {
             int linkEndNode = in.nextInt();
             Player.addNodeWithNewLink(linkStartNode, linkEndNode);
         }
-        
-        exitsList = new ArrayList<>(exits);
-        for (int i = 0; i < exits; i++) {
-            exitsList.add(in.nextInt()); // adding index of a gateway node to list
-        }
+ 
+        Player.extractExitsList(exits, in);
 
         // game loop
         while (true) {
             int agentPosition = in.nextInt(); // The index of the node on which the Skynet agent is positioned this turn
+            int linkToSeverEndNode = findLinkToSevereEndNode(agentPosition);
 
-
-            List<Integer> agentPositionLinkedNodes = linksMap.get(agentPosition);
-            
-            System.out.println(agentPosition + " " + agentPositionLinkedNodes.get(0));
+			System.out.println(agentPosition + " " + linkToSeverEndNode);
 
             // Write an action using System.out.println()
             // To debug: System.err.println("Debug messages...");
             
          //   System.out.println("0 1"); // Example: 0 1 are the indices of the nodes you wish to sever the link between
+        }
+    }
+
+	private static int findLinkToSevereEndNode(int agentPosition) {
+		int linkToSeverEndNode = -1;
+		
+		for (Integer exit : exitsList) {
+			List<Integer> exitLinksList = linksMap.get(exit);
+			
+			if(exitLinksList.contains(agentPosition)){
+				linkToSeverEndNode = exit;
+				break;
+			}
+		}
+
+		// If agent is not in direct link with exit, severe first linked node
+        if(linkToSeverEndNode == -1){
+        	linkToSeverEndNode = linksMap.get(agentPosition).get(0);
+        }
+		
+		return linkToSeverEndNode;
+	}
+
+    private static void extractExitsList(int exits, Scanner in) {
+        exitsList = new ArrayList<>(exits);
+        for (int i = 0; i < exits; i++) {
+            exitsList.add(in.nextInt()); // adding index of a gateway node to list
         }
     }
 
