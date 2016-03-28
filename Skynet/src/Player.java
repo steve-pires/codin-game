@@ -28,7 +28,7 @@ class Player {
             // Write an action using System.out.println()
             // To debug: System.err.println("Debug messages...");
 
-            System.out.println("0 1"); // Example: 0 1 are the indices of the nodes you wish to sever the link between
+            System.out.println("1 2"); // Example: 0 1 are the indices of the nodes you wish to sever the link between
         }
     }
 }
