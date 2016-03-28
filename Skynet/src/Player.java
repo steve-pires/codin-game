@@ -44,7 +44,9 @@ class Player {
 		for (Integer exit : exitsList) {
 			List<Integer> exitLinksList = linksMap.get(exit);
 			
-			if(exitLinksList.contains(agentPosition)){
+			// if there are registered links for the exit
+			// and there is a direct link with agent's position
+			if(exitLinksList!=null && exitLinksList.contains(agentPosition)){
 				linkToSevereEndNode = exit;
 				break;
 			}
