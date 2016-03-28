@@ -34,28 +34,28 @@ class Player {
             // Write an action using System.out.println()
             // To debug: System.err.println("Debug messages...");
             
-         //   System.out.println("0 1"); // Example: 0 1 are the indices of the nodes you wish to sever the link between
+			//   System.out.println("0 1"); // Example: 0 1 are the indices of the nodes you wish to sever the link between
         }
     }
 
 	private static int findLinkToSevereEndNode(int agentPosition) {
-		int linkToSeverEndNode = -1;
+		int linkToSevereEndNode = -1;
 		
 		for (Integer exit : exitsList) {
 			List<Integer> exitLinksList = linksMap.get(exit);
 			
 			if(exitLinksList.contains(agentPosition)){
-				linkToSeverEndNode = exit;
+				linkToSevereEndNode = exit;
 				break;
 			}
 		}
 
 		// If agent is not in direct link with exit, severe first linked node
-        if(linkToSeverEndNode == -1){
-        	linkToSeverEndNode = linksMap.get(agentPosition).get(0);
+        if(linkToSevereEndNode == -1){
+        	linkToSevereEndNode = linksMap.get(agentPosition).get(0);
         }
 		
-		return linkToSeverEndNode;
+		return linkToSevereEndNode;
 	}
 
     private static void extractExitsList(int exits, Scanner in) {
@@ -65,20 +65,20 @@ class Player {
         }
     }
 
-    /**
-     * Stores each nodes and its links in a Map.
-     * Each link is composed of two nodes which are passed in parameters.
-     * @param linkStartNode
-     * @param linkEndNode
-     */
+	/**
+	 * Stores each nodes and its links in a Map.
+	 * Each link is composed of two nodes which are passed in parameters.
+	 * @param linkStartNode
+	 * @param linkEndNode
+	 */
 	private static void addNodeWithNewLink(int linkStartNode, int linkEndNode) {
-        if(linksMap.containsKey(linkStartNode)) {
-        	List<Integer> linkedNodes = linksMap.get(linkStartNode);
-        	linkedNodes.add(linkEndNode);
-        } else {
-        	List<Integer> linkedNodes = new ArrayList<>();
-        	linkedNodes.add(linkEndNode);
-        	linksMap.put(linkStartNode, linkedNodes);
-        }
+	    if(linksMap.containsKey(linkStartNode)) {
+	    	List<Integer> linkedNodes = linksMap.get(linkStartNode);
+	    	linkedNodes.add(linkEndNode);
+	    } else {
+	    	List<Integer> linkedNodes = new ArrayList<>();
+	    	linkedNodes.add(linkEndNode);
+	    	linksMap.put(linkStartNode, linkedNodes);
+	    }
 	}
 }
